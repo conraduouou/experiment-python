@@ -22,10 +22,12 @@ while not finished:
     choice = input(f"What would you like? ({items.get_items()}): ")
 
     # to ensure user always choose among the three options
-    while not in_menu(items, choice) and choice != "report":
+    while not in_menu(items, choice) and choice != "report" and choice != "off":
         choice = input("Invalid input. Follow the instructions above: ")
 
-    if choice == "report":
+    if choice == "off":
+        finished = True
+    elif choice == "report":
         coffee_vendor.report()
         cash_machine.report()
     else:
