@@ -14,10 +14,7 @@ class Snake:
         snake segment by segment"""
         self.snake_segments = []
         for i in range(3):
-            self.snake_segments.append(Turtle(shape="square"))
-            self.snake_segments[i].penup()
-            self.snake_segments[i].color("white")
-            self.snake_segments[i].setx(-(i * 20))
+            self.grow()
         
         self.head().color("yellow")
 
@@ -35,6 +32,30 @@ class Snake:
             self.snake_segments[i].goto(self.snake_segments[i - 1].pos())
         
         self.snake_segments[0].forward(MOVE_DISTANCE)
+    
+    def grow(self):
+        """Makes the snake grow as it eats."""
+        self.snake_segments.append(Turtle(shape="square"))
+
+        last = self.snake_segments[len(self.snake_segments) - 1]
+        last.penup()
+        last.color("white")
+
+        second_to_last = self.snake_segments[len(self.snake_segments) - 2]
+
+        last.seth(second_to_last.heading())
+        last.goto(second_to_last.pos())
+        
+
+    def check(self):
+        """Checks everytime if head is colliding with its segments."""
+
+        for segment in self.snake_segments[1:len(self.snake_segments)]:
+            if self.head().distance(segment) <= 15:
+                return True
+        
+        return False
+
 
     # function with no parameters that turns snake left
     def turn_left(self):
