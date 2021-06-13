@@ -57,13 +57,14 @@ while not is_finished:
         if ball.xcor() >= paddle2.xcor() - 20 or ball.xcor() <= paddle1.xcor() + 20:
             if ball.heading() < 90 or ball.heading() > 270:
                 ball.seth(random.uniform(110, 250))
-                ball.speed * ball.speed
+                ball.speed *= ball.speed
             else:
                 ball.seth(random.uniform(70, -70))
-                ball.speed * ball.speed
+                ball.speed *= ball.speed
 
     if ball.collide_wall(HEIGHT):
         ball.seth(-(ball.heading()))
+        ball.speed *= ball.speed
 
     if ball.xcor() >= WIDTH / 2:
         score.increment_l()
