@@ -56,6 +56,15 @@ class Snake:
         
         return False
 
+    
+    def reset(self):
+        for segment in self.snake_segments:
+            segment.hideturtle()
+        self.snake_segments.clear()
+        
+        for i in range(3):
+            self.grow()
+
 
     # function with no parameters that turns snake left
     def turn_left(self):

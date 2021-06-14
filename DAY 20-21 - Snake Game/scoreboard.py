@@ -13,20 +13,32 @@ class Scoreboard(Turtle):
         self.pendown()
 
         self.score = 0
+
+        with open("DAY 20-21 - Snake Game\score.txt") as f:
+            self.high_score = int(f.read())
+
     
     def update(self):
         """Updates score on screen."""
         self.clear()
-        self.write(f"Score: {self.score}", move=False, align=ALIGN, font=FONT)
+        self.write(f"Score: {self.score}  High Score: {self.high_score}", move=False, align=ALIGN, font=FONT)
     
     def increase(self):
         """Increases score by one."""
         self.score += 1
         self.update()
 
-    def game_over(self):
-        """Initiates game over sequence."""
-        self.penup()
-        self.home()
-        self.pendown()
-        self.write("GAME OVER", move=False, align=ALIGN, font=FONT)
+    def reset(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+
+            with open("DAY 20-21 - Snake Game\score.txt", mode="w") as f:
+                f.write(f"{self.high_score}")
+        self.score = 0
+        
+
+
+    # def game_over(self):
+    #     """Initiates game over sequence."""
+    #     self.home()
+    #     self.write("GAME OVER", move=False, align=ALIGN, font=FONT)

@@ -40,17 +40,17 @@ while not is_finished:
     tim.update()
 
     if snake.check():
-        is_finished = True
-        tim.game_over()
+        snake.reset()
+        tim.reset()
 
     if snake.head().distance(food) <= 15:
         snake.grow()
         food.refresh()
         tim.increase()
 
-    if snake.head().xcor() > (WIDTH / 2 - 40) or snake.head().xcor() < -(WIDTH / 2 - 20) or snake.head().ycor() > (HEIGHT / 2 - 20) or snake.head().ycor() < -(HEIGHT / 2 - 40):
-        is_finished = True
-        tim.game_over()
+    if snake.head().xcor() > (WIDTH / 2 - 20) or snake.head().xcor() < -(WIDTH / 2 - 20) or snake.head().ycor() > (HEIGHT / 2 - 20) or snake.head().ycor() < -(HEIGHT / 2 - 20):
+        snake.reset()
+        tim.reset()
 
     screen.update()
     time.sleep(0.08)
