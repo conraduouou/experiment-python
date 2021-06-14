@@ -9,19 +9,14 @@
 
 with open("Input/Letters/starting_letter.txt") as letter:
     with open("Input/Names/invited_names.txt") as names:
-        
         names_to_strip = names.readlines()
-        names_list = []
-        for i in range(len(names_to_strip)):
-            names_list.append(names_to_strip.pop().strip())
-
-        names_list.reverse()
 
     letter_lines = letter.readlines()
 
-    for name in names_list:
-        line_to_insert = letter_lines[0].replace("[name]", name)
-        with open(f"Output/ReadyToSend/Letter For {name}.txt", mode="w") as file:
+    for name in names_to_strip:
+        stripped_name = name.strip()
+        line_to_insert = letter_lines[0].replace("[name]", stripped_name)
+        with open(f"Output/ReadyToSend/Letter For {stripped_name}.txt", mode="w") as file:
             file.write(line_to_insert)
             for i in range(1, len(letter_lines)):
                 file.write(letter_lines[i])
