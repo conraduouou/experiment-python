@@ -24,9 +24,6 @@ def is_match(Datetime, p_details):
 birthdays = pandas.read_csv("DAY 32 - SMTP/birthdays.csv")
 birthdays_list = birthdays.to_dict(orient="records")
 
-# letters to be accessed with respect to experiment-python folder
-letters_list = [f"DAY 32 - SMTP/letter_templates/letter_{number}.txt" for number in range(1, 4)]
-
 # datetime
 now = dt.datetime.now()
 
@@ -37,7 +34,7 @@ password = "conradoislife23"
 # loop through each person in birthday list
 for person in birthdays_list:
     if is_match(now, person):
-        path = random.choice(letters_list)
+        path = f"DAY 32 - SMTP/letter_templates/letter_{random.randint(1,3)}.txt"
 
         with open(path) as letter:
             contents = letter.read()
