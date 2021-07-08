@@ -25,11 +25,6 @@ stock_parameters = {
 response = requests.get(url="https://www.alphavantage.co/query", params=stock_parameters)
 response.raise_for_status()
 
-# acquire current date
-date = dt.datetime.now()
-month = date.month
-day = date.day
-
 # get data and assign yesterday and day before yesterday
 data = response.json()["Time Series (Daily)"]
 stock_data = [data[item] for item in data]
