@@ -31,29 +31,14 @@ month = date.month
 day = date.day
 
 # get data and assign yesterday and day before yesterday
-stock_data = response.json()["Time Series (Daily)"]
-last1_day = None
-last2_day = None
+data = response.json()["Time Series (Daily)"]
+stock_data = [data[item] for item in data]
 
-# get last 2 days of active stock
-while True:
-    if f"{date.year}-{month:02d}-{day:02d}" in stock_data and last1_day == None:
-        last1_day = stock_data[f"{date.year}-{month:02d}-{day:02d}"]
-    elif f"{date.year}-{month:02d}-{day:02d}" in stock_data:
-        last2_day = stock_data[f"{date.year}-{month:02d}-{day:02d}"]
-        break
-    
-    if day - 1 == 0:
-        month -= 1
-        day = 31
-    else:
-        day -= 1
+last1_day = stock_data[0]
+last2_day = stock_data[1]
  
-
 stock_price_difference = (float(last1_day["4. close"]) - float(last2_day["4. close"]))
 difference_percentage = abs(stock_price_difference / float(last1_day["1. open"]))
-
-
 
 ## STEP 2: Use https://newsapi.org
 # Instead of printing ("Get News"), actually get the first 3 news pieces for the COMPANY_NAME. 
