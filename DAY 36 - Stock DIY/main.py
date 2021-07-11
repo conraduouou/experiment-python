@@ -1,3 +1,4 @@
+from decouple import config
 import requests
 import datetime as dt
 from twilio.rest import Client
@@ -6,12 +7,12 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
 # twilio
-SID = "AC2a10ad9b2fc92cf340629a6318328d0a"
-TOKEN = "ecfa98dd6d019dca4d55ecdf6e69a329"
+SID = config('ACCOUNT_SID')
+TOKEN = config('AUTH_TOKEN')
 
 # api keys
-STOCK_API_KEY = "4UT0V9I4XBXI5UDK"
-NEWS_API_KEY = "5bc84800eed443baa5f34f1d7a73452e"
+STOCK_API_KEY = config('STOCK_KEY')
+NEWS_API_KEY = config('NEWS_KEY')
 
 ## STEP 1: Use https://www.alphavantage.co
 # When STOCK price increase/decreases by 5% between yesterday and the day before yesterday then print("Get News").

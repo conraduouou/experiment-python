@@ -1,5 +1,6 @@
 */__pycache__/
 *.DS_Store
 .vscode
+.env
 
 DAY 32 - SMTP/output

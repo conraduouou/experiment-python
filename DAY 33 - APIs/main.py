@@ -1,3 +1,4 @@
+from decouple import config
 import requests
 import smtplib
 from datetime import datetime
@@ -5,8 +6,8 @@ from datetime import datetime
 MY_LAT = 14.689061 # Your latitude
 MY_LONG = 120.995954 # Your longitude
 
-EMAIL    = "nakko927saved@gmail.com"
-PASSWORD = "conradoislife23"
+EMAIL    = config('N_EMAIL')
+PASSWORD = config('N_PASSWORD')
 
 response = requests.get(url="http://api.open-notify.org/iss-now.json")
 response.raise_for_status()

@@ -1,9 +1,10 @@
+from decouple import config
 import requests
 import datetime as dt
 
 # exercise details
-APP_ID = "844aaf96"
-API_KEY = "f2522ec51bbc374b262c0c7942826d82"
+APP_ID = config('WORKOUT_ID')
+API_KEY = config('WORKOUT_KEY')
 
 exercise_endpoint = "https://trackapi.nutritionix.com/v2/natural/exercise"
 sheety_endpoint = "https://api.sheety.co/80df8836e657518ca270cc78ca65b49d/workoutTracing/workouts"
@@ -29,7 +30,7 @@ today = dt.datetime.now()
 
 # security headers
 sheety_headers = {
-    "Authorization": "Bearer nagyungiloveusomuchhuhuhuhu"
+    "Authorization": f"Bearer {config('SHEET_TOKEN')}"
 }
 
 for item in workout_data:

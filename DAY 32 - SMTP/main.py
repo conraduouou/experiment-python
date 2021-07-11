@@ -8,6 +8,7 @@
 
 # 4. Send the letter generated in step 3 to that person's email address.
 
+from decouple import config
 import pandas
 import smtplib
 import random
@@ -28,8 +29,8 @@ birthdays_list = birthdays.to_dict(orient="records")
 now = dt.datetime.now()
 
 # email and password
-my_email = "nakko927saved@gmail.com"
-password = "conradoislife23"
+my_email = config('N_EMAIL')
+password = config('N_PASSWORD')
 
 # loop through each person in birthday list
 for person in birthdays_list:

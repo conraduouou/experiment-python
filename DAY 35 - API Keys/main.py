@@ -1,14 +1,14 @@
+from decouple import config
 import requests
 from twilio.rest import Client
 
 # constants
 LATITUDE = 14.69
 LONGITUDE = 121.00
-API_KEY = "bb4d1f3635a6578a93e1ae51fcbf0e54"
+API_KEY = config('OWM_API_KEY')
 
-account_sid = "AC2a10ad9b2fc92cf340629a6318328d0a"
-auth_token = "ecfa98dd6d019dca4d55ecdf6e69a329"
-
+account_sid = config('ACCOUNT_SID')
+auth_token = config('AUTH_TOKEN')
 
 # API params
 parameters = {
