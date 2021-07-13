@@ -12,7 +12,8 @@ HERE_IATA = "MNL"
 # flight search endpoint
 locations_endpoint = "https://tequila-api.kiwi.com/locations/query"
 search_endpoint = "https://tequila-api.kiwi.com/v2/search"
-sheety_endpoint = "https://api.sheety.co/80df8836e657518ca270cc78ca65b49d/flightDeals/prices"
+prices_endpoint = "https://api.sheety.co/80df8836e657518ca270cc78ca65b49d/flightDeals/prices"
+users_endpoint = "https://api.sheety.co/80df8836e657518ca270cc78ca65b49d/flightDeals/users"
 
 # headers
 sheety_headers = {
@@ -23,15 +24,14 @@ search_headers = {
     "apikey": config('FLIGHT_KEY')
 }
 
-
 # initialize classes
-data_manager = DataManager(sheety_endpoint, sheety_headers)
+data_manager = DataManager(prices_endpoint, users_endpoint, sheety_headers)
 flight_search = FlightSearch(s_endpoint=search_endpoint, l_endpoint=locations_endpoint, headers=search_headers, iata_code=HERE_IATA)
 flight_data = []
 
 
 # supply test values
-# for row in range(data_manager.rows):
+# for row in range(data_manager.sheet_rows):
 #     to_pass = {
 #         "price": {
 #             "iataCode": flight_search.search_location(data_manager.sheet_data[row]["city"])
@@ -47,3 +47,5 @@ for row in data_manager.sheet_data:
 messenger = NotificationManager(flight_data, config('ACCOUNT_SID'), config('AUTH_TOKEN'))
 
 messenger.send_message()
+
+messenger.send_emails(data_manager.users_data, config('N_EMAIL'), config('N_PASSWORD'))
