@@ -29,16 +29,17 @@ data_manager = DataManager(prices_endpoint, users_endpoint, sheety_headers)
 flight_search = FlightSearch(s_endpoint=search_endpoint, l_endpoint=locations_endpoint, headers=search_headers, iata_code=HERE_IATA)
 flight_data = []
 
-
 # supply test values
-# for row in range(data_manager.sheet_rows):
-#     to_pass = {
-#         "price": {
-#             "iataCode": flight_search.search_location(data_manager.sheet_data[row]["city"])
-#         }
-#     },
+for row in range(data_manager.sheet_rows):
+    if data_manager.sheet_data[row]["iataCode"] == "":
+        to_pass = {
+            "price": {
+                "iataCode": flight_search.search_location(data_manager.sheet_data[row]["city"])
+            }
+        }
 
-#     data_manager.update_code(to_pass, row)
+        data_manager.update_code(to_pass, row)
+
 
 for row in data_manager.sheet_data:
     flight_data.append(flight_search.search_flight(row["iataCode"], row["lowestPrice"]))
@@ -47,5 +48,3 @@ for row in data_manager.sheet_data:
 messenger = NotificationManager(flight_data, config('ACCOUNT_SID'), config('AUTH_TOKEN'))
 
 messenger.send_message()
-
-messenger.send_emails(data_manager.users_data, config('N_EMAIL'), config('N_PASSWORD'))

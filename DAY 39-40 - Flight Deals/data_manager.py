@@ -24,5 +24,6 @@ class DataManager:
     
     def update_code(self, json_params, row) -> None:
         """Updates row with their corresponding IATA codes."""
+        print(json_params)
         response = requests.put(url=self.p_endpoint + f"/{row + 2}", headers=self.headers, json=json_params)
         response.raise_for_status()

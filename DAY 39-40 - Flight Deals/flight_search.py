@@ -11,6 +11,7 @@ class FlightSearch:
         self.headers = kw.pop('headers', None)
         self.code = kw.pop('iata_code', None)
 
+
     def search_location(self, location) -> str:
         """Uses the Kiwi API to search via the location endpoint with specified location as str for IATA code."""
 
@@ -19,15 +20,31 @@ class FlightSearch:
             "location_types": "city"
         }
 
-        response = requests.get(url=self.location_endpoint, params=search_params, headers=self.headers)
-        response.raise_for_status()
+        while True:
+            response = requests.get(url=self.location_endpoint, params=search_params, headers=self.headers)
+            response.raise_for_status()
 
-        data = response.json()["locations"]
+            data = response.json()["locations"]
+
+            if len(data) == 0 and search_params["location_types"] == "city":
+                search_params["location_types"] = "airport"
+                continue
+            else:
+                break
 
         for item in data:
             if item["name"].lower() == location.lower():
                 return item['code']
+            else:
+                try:
+                    for name in item["alternative_names"]:
+                        if location.lower() in name.lower():
+                            return item['code']
+                except IndexError:
+                    print(f"No IATA code, at least in airport and city for {location}.")
+                    return
     
+
     def request_search(self, stopovers, params) -> FlightData:
         params['max_stopovers'] = stopovers
 
@@ -55,6 +72,7 @@ class FlightSearch:
                 stopovers=1 if stopovers != 0 else 0,
                 via_city=data['route'][0]['cityTo'] if stopovers != 0 else ""
             )
+
 
     def search_flight(self, iata_code, lowest_price) -> FlightData:
         today = datetime.now()
