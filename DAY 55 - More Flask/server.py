@@ -4,11 +4,6 @@ import random
 app = Flask(__name__)
 number = random.randint(0, 9)
 
-def make_h1(function):
-    def wrapper():
-        return f'<h1>{function()}</h1>'
-    return wrapper
-
 @app.route('/')
 def home():
     return '<h1>Guess a number between 0 and 9</h1>' \
