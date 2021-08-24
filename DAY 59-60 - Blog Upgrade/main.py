@@ -1,4 +1,3 @@
-from types import MethodDescriptorType
 from flask import Flask, render_template, request
 from decouple import config
 import requests
