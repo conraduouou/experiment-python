@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Add a New Cafe{% endblock %}
+
+{% block content %}
+    <div class="add-div">
+        <h1>Add a new cafe into the database</h1>
+        
+        {{ wtf.quick_form(form, novalidate=True) }}
+        
+        <a href=" {{ url_for('cafes') }} " class="text-decoration-none">See all cafes</a>
+    </div>
+{% endblock %}

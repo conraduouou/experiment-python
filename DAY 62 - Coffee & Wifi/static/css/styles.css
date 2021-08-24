@@ -1,0 +1,96 @@
+body {
+    background-color: #353633;
+    font-size: 2rem;
+    color: white;
+}
+
+h1 {
+    font-size: 9rem;
+}
+
+hr {
+    margin: 20px auto;
+    width: 90%;
+}
+
+a {
+    color: #f2b546;
+}
+
+a:hover {
+    color: #d49420;
+}
+
+
+/* index page */
+.index {
+    padding-top: 15%;
+    text-align: center;
+}
+
+.index-text {
+    font-size: 26px;
+}
+
+.button-div {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.show-button {
+    background-color: #f2b546;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px;
+    line-height: 1.333333;
+    padding: 10px 16px;
+}
+
+.show-button:hover {
+    background-color: #d49420;
+    color: white;
+}
+
+
+/* cafes */
+.cafe-table {
+    color: white;
+    margin-bottom: 30px;
+}
+
+.cafe-div {
+    padding: 50px;
+}
+
+
+/* add cafe */
+.add-div {
+    margin: 50px;
+    font-size: 2rem;
+}
+
+.add-div form {
+    margin-bottom: 50px;
+}
+
+.add-div input {
+    font-size: 18px;
+}
+
+.add-div select {
+    font-size: 18px;
+}
+
+.add-div .btn {
+    background-color: #f2b546;
+    border-radius: 6px;
+    color: white;
+    font-size: 18px;
+    line-height: 1.333333;
+    padding: 10px 16px;
+}
+
+.add-div .btn:hover {
+    background-color: #d49420;
+    color: white;
+}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}All Cafes{% endblock %}
+
+{% block content %}
+    <div class="cafe-div">
+        <h1>All Cafes</h1>
+        <table class="table cafe-table">
+            <tbody>
+                {% for cafe in cafes %}
+                    <tr>
+                        {% for item in cafe %}
+                            {% if item.startswith('http') %}
+                                <td><a class="text-decoration-none" href=" {{ item }} ">Map Link</a></td>
+                            {% else %}
+                                <td> {{ item }} </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <a href=" {{ url_for('home') }} " class="text-decoration-none">Return to index page</a>
+    </div>
+
+{% endblock %}
