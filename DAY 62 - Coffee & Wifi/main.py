@@ -1,9 +1,7 @@
-from flask import Flask, render_template, redirect
-from flask.helpers import url_for
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import fields
-from wtforms.csrf.core import CSRFTokenField
 from wtforms.validators import DataRequired, URL
 import csv
 
