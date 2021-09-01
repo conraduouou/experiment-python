@@ -30,6 +30,7 @@ def home():
     return render_template("index.html")
     
 
+
 ## HTTP GET - Read Record
 
 # get random cafe from database with jsonify
@@ -135,6 +136,7 @@ def search_cafe():
     return jsonify({'error': {'Not Found': "Sorry, we don't have a cafe at that location."}})
 
 
+
 ## HTTP POST - Create Record
 
 # adds cafe to database
@@ -159,6 +161,7 @@ def add_cafe():
     return jsonify({'response': {'success': 'Successfully added the new cafe.'}})
 
 
+
 ## HTTP PUT/PATCH - Update Record
 
 # updates price of a single cafe in a database with specified id
@@ -173,6 +176,7 @@ def update_price(cafe_id):
         return jsonify({'success': 'Successfully updated the price.'}), 200
 
     return jsonify({'error': {'Not Found': 'Sorry, a cafe with that id was not found in the database.'}}), 404
+
 
 
 ## HTTP DELETE - Delete Record
@@ -192,6 +196,8 @@ def delete(cafe_id):
         return jsonify({'error': "Sorry, that's not allowed. Make sure you have the correct api_key."}), 403
 
     return jsonify({"error": {"Not Found": "Sorry, a cafe with that id was not found in the database."}}), 403
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
