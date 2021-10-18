@@ -42,7 +42,7 @@ def start():
 def calculate():
     end_time = time.time()
 
-    window.bind('<Key>', func=None)
+    window.unbind('<Key>', id)
 
     user_words = field.get().split(' ')
     field.config(state=DISABLED)
@@ -65,12 +65,25 @@ def calculate():
 
 # update labels
 def change(*args):
+    if time.time() - float(start_label['text']) >= 60:
+        calculate()
+
     count = len(field.get().split(' ')) - 1
 
     count_label.config(text='Count: %d' % count)
 
-    if count >= len(word_label['text'].split(' ')):
-        calculate()
+    if count >= len(random_words):
+        new_words = []
+        for i in range(16):
+            while True:
+                word_to_append = random.choice(words)
+                if len(word_to_append) <= 6:
+                    break
+            
+            new_words.append(word_to_append)
+            random_words.append(word_to_append)
+        
+        word_label.config(text=' '.join(new_words))
 
 
 # GUI Program
@@ -80,7 +93,7 @@ window.minsize(width=WIDTH, height=HEIGHT)
 window.resizable(width=False, height=False)
 
 # to update label and count widgets
-window.bind('<Key>', change)
+id = window.bind('<Key>', change)
 
 # placeholders for start timer
 start_label = Label()
