@@ -131,7 +131,7 @@ while GAME_STATE != 'over':
         print("typing it in the prompts.\n")
         print("Good luck!!")
 
-        input("Press anything to continue.\n")
+        input("Press ENTER/RETURN to continue.\n")
 
         go_first = choice([True, False])
 
