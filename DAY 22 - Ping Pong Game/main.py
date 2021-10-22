@@ -1,6 +1,6 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
-from ball import Ball
+from ball import Ball, SPEED_MULTIPLIER
 from score import Score
 import random
 import time
@@ -42,6 +42,10 @@ score = Score(HEIGHT)
 # listen to commands
 screen.onkeypress(fun=paddle1.go_up, key="w")
 screen.onkeypress(fun=paddle1.go_down, key="s")
+
+screen.onkeypress(fun=paddle2.go_up, key="Up")
+screen.onkeypress(fun=paddle2.go_down, key="Down")
+
 screen.listen()
 
 print(paddle1.heading())
@@ -57,27 +61,28 @@ while not is_finished:
         if ball.xcor() >= paddle2.xcor() - 20 or ball.xcor() <= paddle1.xcor() + 20:
             if ball.heading() < 90 or ball.heading() > 270:
                 ball.seth(random.uniform(110, 250))
-                ball.speed *= ball.speed
+                ball.speed *= SPEED_MULTIPLIER
             else:
                 ball.seth(random.uniform(70, -70))
-                ball.speed *= ball.speed
+                ball.speed *= SPEED_MULTIPLIER
 
     if ball.collide_wall(HEIGHT):
         ball.seth(-(ball.heading()))
-        ball.speed *= ball.speed
+        ball.speed *= SPEED_MULTIPLIER
 
     if ball.xcor() >= WIDTH / 2:
         score.increment_l()
+        ball.speed = SPEED_MULTIPLIER
         ball.home()
         ball.seth(0)
     elif ball.xcor() <= -(WIDTH / 2):
         score.increment_r()
+        ball.speed = SPEED_MULTIPLIER
         ball.home()
         ball.seth(180)
 
     time.sleep(0.05)
     screen.update()
-
 
 
 screen.exitonclick()

@@ -4,7 +4,7 @@ import random
 BALL_SHAPE = "circle"
 BALL_COLOR = "white"
 BALL_SPEED = 20
-SPEED_MULTIPLIER = 1.1
+SPEED_MULTIPLIER = 1.01
 
 class Ball(Turtle):
     def __init__(self):
